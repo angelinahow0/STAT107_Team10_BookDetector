@@ -1,7 +1,6 @@
 ---
 title: "FinalReport.Rmd"
 output: html_document
-date: "2025-11-07"
 ---
 
 ```{r setup, include=FALSE}
@@ -12,3 +11,19 @@ source("00_requirments.R")
 
 ```
 
+# Book Detector 
+
+## Abstract: 
+  The main question that we hope to answer is: can we create an algorithm that can successfully identify what book series a paragraph is from? We will be using 2 book series: Harry Potter and Percy Jackson. In order to answer this question, we are creating a predictive model that will compare the words in the given passage to the common words in each book series. 
+  
+## Introduction: 
+  The purpose of this analysis is to be able to do 
+  
+## Data: 
+  The data that we are using are txt files of the Harry Potter and Percy Jackson books that we found online. There are no specific variables or observations, but rather we have a large dataset of text. To clean the data, we [FINISH THIS]
+  
+## Visualization:
+  
+## Analysis:
+  We plan to use TF-IDF to to calculate the "importance" of each word in the 2 series. Once we have that, we will use Naive Bayes machine learning algorithm to classify the paragraph of text into either the Harry Potter or Percy Jackson series.
+  
