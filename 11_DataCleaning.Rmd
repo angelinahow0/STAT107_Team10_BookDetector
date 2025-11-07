@@ -3,31 +3,10 @@ title: "11_DataCleaning"
 output: html_document
 ---
 
-## R Markdown
+```{r setup, include=FALSE}
+# Load all required libraries
+source("00_requirements.R")
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-```{r}
-
-library(readr)
-library(dplyr)
-library(textclean)
 harry_potter <- read_file("Harry Potter All Books.txt")
 
 hp_clean <- harry_potter %>%
@@ -39,6 +18,107 @@ hp_df <- tibble(text = hp_clean)
 hp_words <- hp_df %>%
   unnest_tokens(word, text)
 
+
+percy1_text <- read_file("Percy Jackson 1.txt")
+
+percy1_clean <- percy1_text %>%
+  tolower() %>%
+  replace_non_ascii() %>%
+  str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
+  str_replace_all("[0-9]", "") %>%                
+  str_squish()                                   
+
+percy1_df <- tibble(text = percy1_clean)
+
+percy1_words <- percy1_df %>%
+  unnest_tokens(word, text)
+
+head(percy1_words)
+
+
+
+percy2_text <- read_file("Percy Jackson 2.txt")
+
+percy2_clean <- percy2_text %>%
+  tolower() %>%
+  replace_non_ascii() %>%
+  str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
+  str_replace_all("[0-9]", "") %>%                
+  str_squish()                                   
+
+percy2_df <- tibble(text = percy2_clean)
+
+percy2_words <- percy2_df %>%
+  unnest_tokens(word, text)
+
+head(percy2_words)
+
+
+
+percy3_text <- read_file("Percy Jackson 3.txt")
+
+percy3_clean <- percy3_text %>%
+  tolower() %>%
+  replace_non_ascii() %>%
+  str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
+  str_replace_all("[0-9]", "") %>%                
+  str_squish()                                   
+
+percy3_df <- tibble(text = percy3_clean)
+
+percy3_words <- percy3_df %>%
+  unnest_tokens(word, text)
+
+head(percy3_words)
+
+
+
+percy4_text <- read_file("Percy Jackson 4.txt")
+
+percy4_clean <- percy4_text %>%
+  tolower() %>%
+  replace_non_ascii() %>%
+  str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
+  str_replace_all("[0-9]", "") %>%                
+  str_squish()                                   
+
+percy4_df <- tibble(text = percy4_clean)
+
+percy4_words <- percy4_df %>%
+  unnest_tokens(word, text)
+
+head(percy4_words)
+
+
+percy5_text <- read_file("Percy Jackson 5.txt")
+
+percy5_clean <- percy5_text %>%
+  tolower() %>%
+  replace_non_ascii() %>%
+  str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
+  str_replace_all("[0-9]", "") %>%                
+  str_squish()                                   
+
+percy5_df <- tibble(text = percy5_clean)
+
+percy5_words <- percy5_df %>%
+  unnest_tokens(word, text)
+
+head(percy5_words)
+
+combined_books <- bind_rows(
+  mutate(hp_words, book = "HarryPotter"),
+  mutate(percy1_words, book = "Percy1"),
+  mutate(percy2_words, book = "Percy2"),
+  mutate(percy3_words, book = "Percy3"),
+  mutate(percy4_words, book = "Percy4"),
+  mutate(percy5_words, book = "Percy5")
+)
+
+
+save(combined_books, file = "12_DataSaving.RData")
+
+head(combined_books)
 ```
 
 
