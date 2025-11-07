@@ -10,8 +10,11 @@ source("00_requirements.R")
 harry_potter <- read_file("Harry Potter All Books.txt")
 
 hp_clean <- harry_potter %>%
+  #convert all the letters to lowercase
   tolower() %>%
+  #remove unwanted symbols
   replace_non_ascii() %>%
+  #remove extra spaces and line breaks
   str_squish()
 
 hp_df <- tibble(text = hp_clean)
@@ -24,7 +27,9 @@ percy1_text <- read_file("Percy Jackson 1.txt")
 percy1_clean <- percy1_text %>%
   tolower() %>%
   replace_non_ascii() %>%
+  #remove special characters
   str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
+  #remove all numbers
   str_replace_all("[0-9]", "") %>%                
   str_squish()                                   
 
@@ -106,6 +111,7 @@ percy5_words <- percy5_df %>%
 
 head(percy5_words)
 
+#combine all the cleaned books
 combined_books <- bind_rows(
   mutate(hp_words, book = "HarryPotter"),
   mutate(percy1_words, book = "Percy1"),
@@ -115,7 +121,7 @@ combined_books <- bind_rows(
   mutate(percy5_words, book = "Percy5")
 )
 
-
+#save those into one file
 save(combined_books, file = "12_DataSaving.RData")
 
 head(combined_books)
