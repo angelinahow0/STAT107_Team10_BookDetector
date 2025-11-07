@@ -17,10 +17,6 @@ hp_clean <- harry_potter %>%
   #remove extra spaces and line breaks
   str_squish()
 
-hp_df <- tibble(text = hp_clean)
-hp_words <- hp_df %>%
-  unnest_tokens(word, text)
-
 
 percy1_text <- read_file("Percy Jackson 1.txt")
 
@@ -33,15 +29,6 @@ percy1_clean <- percy1_text %>%
   str_replace_all("[0-9]", "") %>%                
   str_squish()                                   
 
-percy1_df <- tibble(text = percy1_clean)
-
-percy1_words <- percy1_df %>%
-  unnest_tokens(word, text)
-
-head(percy1_words)
-
-
-
 percy2_text <- read_file("Percy Jackson 2.txt")
 
 percy2_clean <- percy2_text %>%
@@ -49,16 +36,7 @@ percy2_clean <- percy2_text %>%
   replace_non_ascii() %>%
   str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
   str_replace_all("[0-9]", "") %>%                
-  str_squish()                                   
-
-percy2_df <- tibble(text = percy2_clean)
-
-percy2_words <- percy2_df %>%
-  unnest_tokens(word, text)
-
-head(percy2_words)
-
-
+  str_squish()
 
 percy3_text <- read_file("Percy Jackson 3.txt")
 
@@ -69,15 +47,6 @@ percy3_clean <- percy3_text %>%
   str_replace_all("[0-9]", "") %>%                
   str_squish()                                   
 
-percy3_df <- tibble(text = percy3_clean)
-
-percy3_words <- percy3_df %>%
-  unnest_tokens(word, text)
-
-head(percy3_words)
-
-
-
 percy4_text <- read_file("Percy Jackson 4.txt")
 
 percy4_clean <- percy4_text %>%
@@ -86,14 +55,6 @@ percy4_clean <- percy4_text %>%
   str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
   str_replace_all("[0-9]", "") %>%                
   str_squish()                                   
-
-percy4_df <- tibble(text = percy4_clean)
-
-percy4_words <- percy4_df %>%
-  unnest_tokens(word, text)
-
-head(percy4_words)
-
 
 percy5_text <- read_file("Percy Jackson 5.txt")
 
@@ -104,21 +65,19 @@ percy5_clean <- percy5_text %>%
   str_replace_all("[0-9]", "") %>%                
   str_squish()                                   
 
-percy5_df <- tibble(text = percy5_clean)
+#instead of file, out it in a list so it will be easier when we try to identify book by sentence
+books_fulltext <- list(
+  HarryPotter = hp_clean,
+  Percy1 = percy1_clean,
+  Percy2 = percy2_clean,
+  Percy3 = percy3_clean,
+  Percy4 = percy4_clean,
+  Percy5 = percy5_clean
+)
 
-percy5_words <- percy5_df %>%
-  unnest_tokens(word, text)
-
-head(percy5_words)
-
-#combine all the cleaned books
-combined_books <- bind_rows(
-  mutate(hp_words, book = "HarryPotter"),
-  mutate(percy1_words, book = "Percy1"),
-  mutate(percy2_words, book = "Percy2"),
-  mutate(percy3_words, book = "Percy3"),
-  mutate(percy4_words, book = "Percy4"),
-  mutate(percy5_words, book = "Percy5")
+combined_books <- tibble(
+  book = names(books_fulltext),
+  text = unlist(books_fulltext)
 )
 
 #save those into one file
