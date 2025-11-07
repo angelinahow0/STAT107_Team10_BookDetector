@@ -27,3 +27,23 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+
+library(readr)
+library(dplyr)
+library(textclean)
+harry_potter <- read_file("Harry Potter All Books.txt")
+
+hp_clean <- harry_potter %>%
+  tolower() %>%
+  replace_non_ascii() %>%
+  str_squish()
+
+hp_df <- tibble(text = hp_clean)
+hp_words <- hp_df %>%
+  unnest_tokens(word, text)
+
+```
+
+
