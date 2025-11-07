@@ -10,3 +10,8 @@ if (!require(tidyverse)) {
   library(tidyverse)
 }
 
+if (!require(tidytext)) {
+  install.packages("tidytext")
+  library(tidytext)
+}
+
