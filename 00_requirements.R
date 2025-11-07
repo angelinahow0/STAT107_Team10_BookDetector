@@ -19,3 +19,18 @@ if (!require(textclean)) {
   install.packages("textclean")
   library(textclean)
 }
+
+if (!require(ggplot2)) {
+  install.packages("ggplot2")
+  library(ggplot2)
+}
+
+if (!require(tm)) {
+  install.packages("tm")
+  library(tm)
+}
+
+if (!require(e1071)) {
+  install.packages("e1071")
+  library(e1071)
+}
