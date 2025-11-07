@@ -15,3 +15,7 @@ if (!require(tidytext)) {
   library(tidytext)
 }
 
+if (!require(textclean)) {
+  install.packages("textclean")
+  library(textclean)
+}
