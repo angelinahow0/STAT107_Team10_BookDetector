@@ -5,3 +5,8 @@ if (!require(stringr)) {
   library(stringr)
 }
 
+if (!require(tidyverse)) {
+  install.packages("tidyverse")
+  library(tidyverse)
+}
+
