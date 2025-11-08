@@ -3,27 +3,24 @@ title: "FinalReport.Rmd"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-```{r}
-source("00_requirments.R")
-
-```
-
 # Book Detector 
 
 ## Abstract: 
   The main question that we hope to answer is: can we create an algorithm that can successfully identify what book series a paragraph is from? We will be using 2 book series: Harry Potter and Percy Jackson. In order to answer this question, we are creating a predictive model that will compare the words in the given passage to the common words in each book series. 
   
 ## Introduction: 
-  The purpose of this analysis is to be able to do 
+  The purpose of this analysis is to be able to see if there is a recognizable difference in the words used in the Harry Potter vs Percy Jackson books. We are training a predictive model to classify a given text paragraph as from either Harry Potter or Percy Jackson. This analysis would benefit someone who is trying to create a copyright detector where they are trying to identify which source a specific chunk of text is from. The different sources could be the text corpuses, and a similar predictive model can be used to classify the copyrighted text.
   
 ## Data: 
-  The data that we are using are txt files of the Harry Potter and Percy Jackson books that we found online. There are no specific variables or observations, but rather we have a large dataset of text. To clean the data, we [FINISH THIS]
+  The data that we are using are txt files of the Harry Potter and Percy Jackson books that we found online. There are no specific variables or observations, but rather we have a large dataset of text. To clean the data, we converted all of the letters to lowercase and removed the unwanted symbols, extra spaces, line breaks, special characters, and numbers. 
   
 ## Visualization:
+```{r, echo = FALSE}
+freq_histograms
+
+```
+These visualizations show that although some of the most frequent words are similar among the book series (for example, "said", "like", back", "one", "know"), there are also words that are unique to each series, mainly names of characters.
   
 ## Analysis:
-  We plan to use TF-IDF to to calculate the "importance" of each word in the 2 series. Once we have that, we will use Naive Bayes machine learning algorithm to classify the paragraph of text into either the Harry Potter or Percy Jackson series.
+  We plan to use TF-IDF to to calculate the "importance" of each word in the 2 series. Once we have that, we will use Naive Bayes machine learning algorithm to classify the paragraph of text into either the Harry Potter or Percy Jackson series. 
   

@@ -23,7 +23,7 @@ clean_tm <- function(book_text) {
   words <- words[nchar(words) > 0]
 return(words)
 }
-#make the changes into all th ebooks
+#make the changes into all the books
 books_words <- lapply(books_fulltext, clean_tm)
 #some test
 books_words$Percy1[1:20]

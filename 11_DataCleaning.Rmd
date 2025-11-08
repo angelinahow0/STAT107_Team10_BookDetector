@@ -14,6 +14,8 @@ hp_clean <- harry_potter %>%
   tolower() %>%
   #remove unwanted symbols
   replace_non_ascii() %>%
+  #remove special characters
+  str_replace_all("[■©:.!?”“—()\",;’‘_-]", " ") %>%  
   #remove extra spaces and line breaks
   str_squish()
 
@@ -24,7 +26,7 @@ percy1_clean <- percy1_text %>%
   tolower() %>%
   replace_non_ascii() %>%
   #remove special characters
-  str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
+  str_replace_all("[■©:.!?”“—()\",;’‘_-]", " ") %>%  
   #remove all numbers
   str_replace_all("[0-9]", "") %>%                
   str_squish()                                   
@@ -34,7 +36,7 @@ percy2_text <- read_file("Percy Jackson 2.txt")
 percy2_clean <- percy2_text %>%
   tolower() %>%
   replace_non_ascii() %>%
-  str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
+  str_replace_all("[■©:.!?”“—()\",;’‘_-]", " ") %>%  
   str_replace_all("[0-9]", "") %>%                
   str_squish()
 
@@ -43,7 +45,7 @@ percy3_text <- read_file("Percy Jackson 3.txt")
 percy3_clean <- percy3_text %>%
   tolower() %>%
   replace_non_ascii() %>%
-  str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
+  str_replace_all("[■©:.!?”“—()\",;’‘_-]", " ") %>%  
   str_replace_all("[0-9]", "") %>%                
   str_squish()                                   
 
@@ -52,7 +54,7 @@ percy4_text <- read_file("Percy Jackson 4.txt")
 percy4_clean <- percy4_text %>%
   tolower() %>%
   replace_non_ascii() %>%
-  str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
+  str_replace_all("[■©:.!?”“—()\",;’‘_-]", " ") %>%  
   str_replace_all("[0-9]", "") %>%                
   str_squish()                                   
 
@@ -61,7 +63,7 @@ percy5_text <- read_file("Percy Jackson 5.txt")
 percy5_clean <- percy5_text %>%
   tolower() %>%
   replace_non_ascii() %>%
-  str_replace_all("[■©:.!?”“—(),;’‘_]", " ") %>%  
+  str_replace_all("[■©:.!?”“—()\",;’‘_-]", " ") %>%  
   str_replace_all("[0-9]", "") %>%                
   str_squish()                                   
 

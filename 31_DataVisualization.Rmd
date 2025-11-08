@@ -1,0 +1,44 @@
+---
+title: "31_DataVisualization"
+output: html_document
+---
+
+```{r}
+source("00_requirements.R")
+
+load("12_DataSaving.RData")
+
+book_words <- enframe(books_words, name = "book", value = "word") %>%
+  unnest(word)
+
+book_words <- book_words %>%
+  mutate(series = ifelse(str_detect(book, "Percy"), "PercyJackson", "HarryPotter"))
+
+
+relative_counts <- book_words %>%
+  count(series, word) %>%
+  group_by(series) %>%
+  mutate(freq = n / sum(n)) %>%
+  ungroup()
+
+top_relative <- relative_counts %>%
+  group_by(series) %>%
+  slice_max(freq, n = 20) %>%
+  ungroup()
+
+freq_histograms <- ggplot(top_relative, aes(x = reorder_within(word, freq, series), y = freq, fill = series)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ series, scales = "free") +
+  scale_x_reordered() +
+  coord_flip() +
+  labs(
+    title = "Most Common Words (Relative Frequency) by Series",
+    x = "Word",
+    y = "Relative Frequency"
+  )
+
+freq_histograms
+
+```
+
+
