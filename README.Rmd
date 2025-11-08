@@ -17,6 +17,7 @@
 - 12_DataSaving: R data file of the cleaned data.
 - 21_DataProcessing: Rmd file for processing the data for analysis. 
 - 31_DataVisualization: Rmd file for making simple visualizations of the word frequencies for each book series
+- WordFreqHistograms.png: the data visualizations for the word frequencies for each book series 
 
 ### Report File:
 - FinalReport.Rmd: Our project report that describes our question, methodology, and conclusions that we aim to reach. 

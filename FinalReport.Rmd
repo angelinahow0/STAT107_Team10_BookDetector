@@ -15,10 +15,8 @@ output: html_document
   The data that we are using are txt files of the Harry Potter and Percy Jackson books that we found online. There are no specific variables or observations, but rather we have a large dataset of text. To clean the data, we converted all of the letters to lowercase and removed the unwanted symbols, extra spaces, line breaks, special characters, and numbers. 
   
 ## Visualization:
-```{r, echo = FALSE}
-freq_histograms
+![Word Frequency Histograms](WordFreqHistograms.png)
 
-```
 These visualizations show that although some of the most frequent words are similar among the book series (for example, "said", "like", back", "one", "know"), there are also words that are unique to each series, mainly names of characters.
   
 ## Analysis:
