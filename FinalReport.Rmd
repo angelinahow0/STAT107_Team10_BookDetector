@@ -24,3 +24,24 @@ These visualizations show that although some of the most frequent words are simi
 ## Analysis:
   We plan to use TF-IDF to to calculate the "importance" of each word in the 2 series. Once we have that, we will use Naive Bayes machine learning algorithm to classify the paragraph of text into either the Harry Potter or Percy Jackson series. 
   
+## Team Contributions:
+Angelina How:
+- Created the Github Repository and all the project files, and shared them with Sara and Bethany
+- Added the book files into the directory
+- Edited the code to remove the stopwords in the data
+- Typed up the README.RMD 
+- Typed up the Final Report
+- Created the visualizations
+
+
+Bethany Galias:
+- Found the Pecry Jackson books online 
+- Added all the required packages to the 00_requirments.R and described them
+- Cleaned, prepared, and saved the data of the Harry Potter books
+
+
+Sara Munkhbayar:
+- Found the Harry Potter books online
+- Cleaned, prepared, and saved the data of the Percy Jackson books
+- Wrote the code to remove stopwords in the data
+
