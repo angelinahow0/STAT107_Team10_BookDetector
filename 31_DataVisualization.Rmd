@@ -38,6 +38,53 @@ freq_histograms <- ggplot(top_relative, aes(x = reorder_within(word, freq, serie
   )
 
 freq_histograms
+```
+
+```{r}
+compute_ttr <- function(tokens) length(unique(tokens)) / length(tokens)
+series_tokens <- split(book_words$word, book_words$series)
+
+ttr_df <- data.frame(
+  series = names(series_tokens),
+  TTR = sapply(series_tokens, compute_ttr)
+)
+
+ggplot(ttr_df, aes(x=series, y=TTR, fill=series)) +
+  geom_bar(stat="identity") +
+  labs(title="Vocabulary Richness by Series", y="TTR") +
+  theme_minimal()
+```
+```{r}
+
+characters <- c("percy", "harry","hermione","ron","dumbledore",
+              "annabeth","grover","poseidon")
+
+# Count occurrences per series
+char_counts <- lapply(series_tokens, function(tokens) {
+  table(factor(tokens[tokens %in% characters], levels=characters))
+})
+
+# Combine into data frame
+char_df <- as.data.frame(do.call(rbind, char_counts))
+char_df$series <- names(series_tokens)  # keep series separate
+rownames(char_df) <- NULL
+
+# Pivot longer for plotting
+char_df_long <- char_df %>%
+  pivot_longer(cols = all_of(characters), 
+               names_to = "character", 
+               values_to = "count")
+
+# Horizontal bar plot
+ggplot(char_df_long, aes(x = character, y = count, fill = series)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Character Frequency by Series",
+       x = "Character",
+       y = "Count") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
 
 ```
 
