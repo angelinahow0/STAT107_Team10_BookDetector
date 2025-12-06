@@ -26,4 +26,5 @@
 1. Run 11_DataCleaning.Rmd.
 2. Run 21_DataProcessing.Rmd.
 3. Run 31_DataVisualization.Rmd.
-3. Run FinalReport.Rmd.
+4. Run 41_TextClassifier.Rmd.
+5. Run FinalReport.Rmd.

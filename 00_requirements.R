@@ -35,8 +35,14 @@ if (!require(tm)) {
   library(tm)
 }
 
-## for predicting outcomes with machine learning algorithms, provides tools  for analysis 
+## for predicting outcomes with machine learning algorithms, provides tools for analysis 
 if (!require(e1071)) {
   install.packages("e1071")
   library(e1071)
+}
+
+## for word stemming
+if(!require(SnowballC)) {
+  install.packages("SnowballC")
+  library(SnowballC) 
 }

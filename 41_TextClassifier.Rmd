@@ -1,0 +1,106 @@
+---
+title: "41_DataAnalysis"
+output: html_document
+---
+
+```{r}
+source("00_requirements.R")
+
+load("12_DataSaving.RData")
+
+# Making sure that all the books from each series have been combined into 2 large lists of words
+books_words <- list(
+  HarryPotter   = book_words$word[book_words$series == "HarryPotter"],
+  PercyJackson  = book_words$word[book_words$series == "PercyJackson"]
+)
+
+normalize_text <- function(tokens_input) {
+  tokens_input <- tolower(tokens_input)
+  tokens_input <- gsub("[^a-z']", " ", tokens_input)
+  tokens_input <- unlist(strsplit(tokens_input, "\\s+"))
+  tokens_input <- tokens_input[nchar(tokens_input) > 0]
+
+  names_list <- c("harry","hermione","ron","dumbledore",
+                  "percy","annabeth","grover","poseidon")
+
+  not_names <- !tokens_input %in% names_list
+  tokens_input[not_names] <- SnowballC::wordStem(tokens_input[not_names])
+  tokens_input
+}
+
+series_tokens <- lapply(books_words, normalize_text)
+series_names  <- names(series_tokens)
+
+all_tokens <- unlist(series_tokens)
+global_counts <- table(all_tokens)
+
+vocab <- names(global_counts[global_counts >= 3])
+
+proper_names <- c(
+  "harry","hermione","ron","dumbledore",
+  "percy","annabeth","grover","poseidon",
+  "riptide","olympus"
+)
+vocab <- unique(c(vocab, proper_names))
+
+V <- length(vocab)
+B <- length(series_tokens)
+
+# TF matrix
+TF <- matrix(0, nrow = B, ncol = V)
+colnames(TF) <- vocab
+
+for (i in seq_len(B)) {
+  counts <- table(series_tokens[[i]])
+  matched <- match(names(counts), vocab)
+  valid <- !is.na(matched)
+  TF[i, matched[valid]] <- counts[valid]
+}
+
+# TF-IDF
+df <- colSums(TF > 0)
+idf <- log(B / (df + 1))
+
+TFIDF <- TF * idf
+
+normalize_rows <- function(m) m / sqrt(rowSums(m^2))
+TFIDF <- normalize_rows(TFIDF)
+
+# Storing final series vectors
+hp_vec <- TFIDF[1, ]
+pj_vec <- TFIDF[2, ]
+
+# Cosine Similarity classifier
+cosine <- function(a, b) sum(a * b)
+
+# Final function to classify paragraph
+classify <- function(text) {
+  tokens <- normalize_text(unlist(strsplit(text, "\\s+")))
+  counts <- table(tokens)
+
+  matched <- match(names(counts), vocab)
+  valid <- !is.na(matched)
+  if (!any(valid)) return("No overlapping vocabulary")
+
+  tf_vec <- numeric(V)
+  tf_vec[matched[valid]] <- counts[valid]
+
+  tfidf_vec <- tf_vec * idf
+
+  score_hp <- cosine(tfidf_vec, hp_vec)
+  score_pj <- cosine(tfidf_vec, pj_vec)
+
+  if (score_hp > score_pj) return("HarryPotter")
+  return("PercyJackson")
+}
+
+
+# Testing classify function
+classify("But he understood at last what Dumbledore had been trying to tell him. It was, he thought, the difference between being dragged into the arena to face a battle to the death and walking into the arena with your head held high. Some people, perhaps, would say that there was little to choose between the two ways, but Dumbledore knew - and so do I, thought Harry, with a rush of fierce pride, and so did my parents - that there was all the difference in the world.")
+
+classify("Let the gods witness I tried. Hero, if you must do this, concentrate on your mortal point. Imagine one spot of your body that will remain vulnerable. This is the point where your soul will anchor your body to the world. It will be your greatest weakness, but also your only hope. No man may be completely invulnerable. Lose sight of what keeps you mortal, and the River Styx will burn you to ashes. You will cease to exist.")
+
+classify("Remember, if the time should come, when you have to make a choice between what is right and what is easy, remember what happened to a boy who was good, and kind, and brave, because he strayed across the path of Lord Voldemort. Remember Cedric Diggory.")
+
+classify("Immortal families are eternally messy. Sometimes the best we can do is to remind each other that we're related for better or for worse… and try to keep the maiming and killing to a minimum.")
+```
