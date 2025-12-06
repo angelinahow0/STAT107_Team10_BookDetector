@@ -24,12 +24,12 @@ Word Frequency:
 This Word Frequency visualization shows that although some of the most frequent words are similar among the book series (for example, "said", "like", back", "one", "know"), there are also words that are unique to each series, mainly names of characters.
 
 Type-Token Ratio: 
-![Vocabulary Frequency Graph] ()
+![Vocabulary Frequency Chart](VocabularyRichness.png)
 
 The TTR bar chart shows that how many unique words are used in each series by dividing the number of unique words by all the words used in that series. A higher TTR indicates more unique word usage relative to text length. We can see that "Harry Potter" used more unique words than "Percy Jackson".
 
 Character Name Counts:
-![The Character Frequency] ()
+![Character Name Frequency Chart](CharacterFrequency.png)
 The Character Frequency Chart shows how many times each names is mentioned in every series. There is a two column that represent the name "percy", and that's because in both series, there is a character named "percy". This chart showes that "Harry Potter" series mentioned each character's names more frequently than "Percy Jackson" series.
 =======
 These visualizations show that although some of the most frequent words are similar among the book series (for example, "said", "like", back", "one", "know"), there are also words that are unique to each series, mainly names of characters.
