@@ -10,14 +10,16 @@
 - Percy Jackson 5.txt: text file that has all of the text in the book Percy Jackson and the Last Olympian.
 
 ### Function Files:
-- 11_requirements: R source code file that includes the necessary packages for the data cleaning, data processing, and analysis.
+- 00_requirements: R source code file that includes the necessary packages for the data cleaning, data processing, and analysis.
 
 ### Analysis Files:
 - 11_DataCleaning: Rmd file for cleaning the data (removing punctuation, numbers, special characters, and converting letters to lowercase) and saving it to the file 12_DataSaving.
 - 12_DataSaving: R data file of the cleaned data.
 - 21_DataProcessing: Rmd file for processing the data for analysis. 
-- 31_DataVisualization: Rmd file for making simple visualizations of the word frequencies for each book series
-- WordFreqHistograms.png: the data visualizations for the word frequencies for each book series 
+- 31_DataVisualization: Rmd file for making simple visualizations of the word frequencies for each book series.
+- 41_TextClassifier: Rmd file for the classification model and testing it.
+- 51_TestingAccuracy: Rmd file for testing the accuracy of the model and printing it.
+- WordFreqHistograms.png: the data visualizations for the word frequencies for each book series.
 
 ### Report File:
 - FinalReport.Rmd: Our project report that describes our question, methodology, and conclusions that we aim to reach. 
@@ -27,4 +29,5 @@
 2. Run 21_DataProcessing.Rmd.
 3. Run 31_DataVisualization.Rmd.
 4. Run 41_TextClassifier.Rmd.
-5. Run FinalReport.Rmd.
+5. Run 51_TestingAccuracy.Rmd.
+6. Run FinalReport.Rmd.

@@ -1,0 +1,50 @@
+---
+title: "51_TestingAccuracy"
+output: html_document
+---
+
+```{r}
+# Creating list of random paragraphs from either book
+test_data <- data.frame(
+  text = c(
+    "Neville’s mother had come edging down the ward in her nightdress. She no longer had the plump, happy-looking face Harry had seen in Moody’s old photograph of the original Order of the Phoenix. Her face was thin and worn now, her eyes seemed overlarge and her hair, which had turned white, was wispy and dead-looking. She did not seem to want to speak, or perhaps she was not able to, but made timid motions towards Neville, holding something in her outstretched hand.",
+    "So people lets try and calm down a bit.Things are bad enough without inventing stuff as well.For instance,this new idea about you-know-who can kill people with a single glance from his eyes.That's a basilisk,listeners.One simple test: check whether the thing that's glaring at you has got legs.If it has,its safe to look into its eyes,although if it really is You-know-who,that's still likely to be the last thing you ever do",
+    "“For HIM?” shouted Snape. “Expecto Patronum!” From the tip of his wand burst the silver doe: She landed on the office floor, bounded once across the office, and soared out of the window. Dumbledore watched her fly away, and as her silvery glow faded he turned back to Snape, and his eyes were full of tears.",
+    "But he understood at last what Dumbledore had been trying to tell him. It was, he thought, the difference   between being dragged into the arena to face a battle to the death and walking into the arena with your head held high. Some people, perhaps, would say that there was little to choose between the two ways, but Dumbledore knew - and so do I, thought Harry, with a rush of fierce pride, and so did my parents - that there was all the difference in the world.",
+    "Remember, if the time should come, when you have to make a choice between what is right and what is easy, remember what happened to a boy who was good, and kind, and brave, because he strayed across the path of Lord Voldemort. Remember Cedric Diggory.",
+    "“We have protected him because it has been essential to teach him, to raise him, to let him try his strength,” said Dumbledore, his eyes still tight shut. “Meanwhile, the connection between them grows ever stronger, a parasitic growth: Sometimes I have thought he suspects it himself. If I know him, he will have arranged matters so that when he does set out to meet his death, it will truly mean the end of Voldemort.”",
+    "I trust that you also noticed that Tom riddle was already highly self-sufficient ,secretive and, apparently, friendless? He did not want help on companionship on his trip to diagon Alley. He preferred to operate alone. The adult Voldemort is the same. You will hear many of his Death Eaters claiming that they are in in his confidence,that they alone are close to him, even understand him. They are deluded. Lord Voldemort has never had a friend, nor do I believe that he has ever wanted one.",
+    "And from then Hermione Granger became their best friend. There are some things you can't share without ending up liking each other, and knocking out a twelve-foot mountain troll is one of them.",
+    "Harry felt drained, empty. Never once, in six years, had Dumbledore told Harry that they had both lived and lost loved ones in Godric’s Hollow. Why? Were Lily and James buried close to Dumbledore’s mother and sister? Had Dumbledore visited their graves, perhaps walked past Lily’s and James’s to do so? And he had never once told Harry … never bothered to say",
+    "Thank you, thank you, for Harry’s birthday present! It was his favourite by far. One year old and already zooming along on a toy broomstick, he looked so pleased with himself, I’m enclosing a picture so you can see. You know it only rises about two feet off the ground, but he nearly killed the cat and he smashed a horrible vase Petunia sent me for Christmas (no complaints there). Of course, James thought it was so funny, says he’s going to be a great Quidditch player, but we’ve had to pack away all the ornaments and make sure we don’t take our eyes off him when he gets going.",
+    "Let the gods witness I tried. Hero, if you must do this, concentrate on your mortal point. Imagine one spot of your body that will remain vulnerable. This is the point where your soul will anchor your body to the world. It will be your greatest weakness, but also your only hope. No man may be completely invulnerable. Lose sight of what keeps you mortal, and the River Styx will burn you to ashes. You will cease to exist.",
+    "Immortal families are eternally messy. Sometimes the best we can do is to remind each other that we're related for better or for worse… and try to keep the maiming and killing to a minimum.",
+    "In a way, it’s nice to know that there are Greek gods out there because you have somebody to blame when things go wrong. For instance, when you’re walking away from a bus that’s just been attacked by monster hags and blown up by lightning, and it’s raining on top of everything else, most people might think that’s just really bad luck; when you’re a half-blood, you understand that some divine force is really trying to mess up your day.",
+    "“I’m nobody’s sidekick,” Annabeth growled. “And, Percy, his accent sounds familiar because he sounds like his mother. We killed her in New Jersey.”
+Percy frowned. “I’m pretty sure that accent isn’t New Jersey. Who’s his—? Oh.”
+It all fell into place. Aunty Em’s Garden Gnome Emporium—the lair of Medusa. She’d talked with that same accent, at least until Percy had cut off her head.
+“Medusa is your mom?” he asked. “Dude, that sucks for you.”", 
+    "“DEMETER!” Hades shouted. “That is enough. You are a guest in my house.”
+“Oh, a house is it?” she said. “You call this dump a house? Make my daughter live in this dark, damp—”
+“I told you,” Hades said, grinding his teeth, “there’s a war in the world above. You and Persephone are better off here with me.” “Excuse me,” I broke in. “But if you’re going to kill me, could you just get on with it?”",
+    "Come now, Percy. What you call ‘Western civilization.’ Do you think it’s just an abstract concept? No, it’s a living force. A collective consciousness that has burned bright for thousands of years.",
+    "I held out a lead figurine of Hades—the little Mythomagic statue Nico had abandoned when he fled camp last winter. Nico hesitated. “I don’t play that game anymore. It’s for kids.” “It’s got four thousand attack power,” I coaxed. “Five thousand,” Nico corrected. “But only if your opponent attacks first.” I smiled. “Maybe it’s okay to still be a kid once in a while.”",
+    "Percy: “I'll be fine. Besides we've got no choice” Annabeth glared at me like she was going to punch me. And then she did something that surprised me even more. She kissed me. Annabeth: “be careful, seaweed brain”, she put on her hat and vanished. I probably would've sat there for the rest of the day, staring at the lava and trying to remember what my name was, but the sea demons jarred me back to reality.",
+    "Rachel: “I'm not sure i can put it into words,” she said. “I was drawn to you because… because you opened the door to all of this” She gestured at the throne room. “I needed to understand my true sight. But you and me, that wasn't part of it. Our fates aren't intertwined. I think you've always known that, deep down”
+I started at her. Maybe I wasn't the brightest guy in the world when it came to girls, but i was pretty sure Rachel had just dumped me, which was lame considering we'd never even been together."
+  ),
+  series = c("HarryPotter", "HarryPotter", "HarryPotter", "HarryPotter", "HarryPotter", "HarryPotter", "HarryPotter", "HarryPotter", "HarryPotter", "HarryPotter", "PercyJackson", "PercyJackson", "PercyJackson", "PercyJackson", "PercyJackson", "PercyJackson", "PercyJackson", "PercyJackson", "PercyJackson"),
+  stringsAsFactors = FALSE
+)
+
+# Applying classify function to the dataset
+test_data$pred <- sapply(test_data$text, classify)
+
+# Calculate and print accuracy
+accuracy <- mean(test_data$pred == test_data$series)
+accuracy
+
+# Display Confusion Matrix
+table(Predicted = test_data$pred, Actual = test_data$series)
+
+```
