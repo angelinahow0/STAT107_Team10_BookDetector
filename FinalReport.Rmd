@@ -20,11 +20,17 @@ output:
 Word Frequency:
 ![Word Frequency Histograms](WordFreqHistograms.png)
 
+<<<<<<< Updated upstream
 This Word Frequency visualization shows that although some of the most frequent words are similar among the book series (for example, "said", "like", back", "one", "know"), there are also words that are unique to each series, mainly names of characters.
 
 Type-Token Ratio:
 
 Word Counts:
+=======
+These visualizations show that although some of the most frequent words are similar among the book series (for example, "said", "like", back", "one", "know"), there are also words that are unique to each series, mainly names of characters.
+
+[Character Frequency Graph] ()
+>>>>>>> Stashed changes
   
 ## Analysis: 
   We plan to use TF-IDF to to calculate the "importance" of each word in the 2 series. Once we have that, we will use Cosine similarity text classification machine learning algorithm to classify the paragraph of text into either the Harry Potter or Percy Jackson series. At first, we were planning to use Naive Bayes, but then switched to Cosine similarity because it is more ideal for comparing the content similarity in text regardless of length (because the total number of words in the Harry Potter series is much larger than in the Percy Jackson series). By testing the model of a list of random paragraphs from both series, we calculated that the accuracy of the model is 0.6842105, or 68.42105% accurate.
